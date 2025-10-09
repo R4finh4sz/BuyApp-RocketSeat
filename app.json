@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "DailyDiet",
-    "slug": "DailyDiet",
+    "name": "AfetoMente",
+    "slug": "AfetoMente",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "../src/assets/icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "scheme": "dailydiet",
@@ -26,9 +26,6 @@
       "favicon": "./assets/favicon.png",
       "bundler": "metro"
     },
-    "plugins": [
-      "expo-font",
-      "expo-router"
-    ]
+    "plugins": ["expo-font", "expo-router"]
   }
 }
