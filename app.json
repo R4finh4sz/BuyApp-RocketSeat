@@ -4,12 +4,12 @@
     "slug": "AfetoMente",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "../src/assets/icon.png",
+    "icon": "./src/assets/expo/icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
-    "scheme": "dailydiet",
+    "scheme": "AfetoMente",
     "splash": {
-      "image": "./assets/splash-icon.png",
+      "image": "./src/assets/expo/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -18,12 +18,13 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./src/assets/expo/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.r4finh4sz.AfetoMente"
     },
     "web": {
-      "favicon": "./assets/favicon.png",
+      "favicon": "./src/assets/expo/favicon.png",
       "bundler": "metro"
     },
     "plugins": ["expo-font", "expo-router"]

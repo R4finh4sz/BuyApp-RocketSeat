@@ -1,24 +1,32 @@
-import React from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { ThemeProvider } from 'styled-components/native';
-import { Stack, SplashScreen } from 'expo-router';
+import {StatusBar} from 'expo-status-bar';
+import {Stack, SplashScreen} from 'expo-router';
 import {
   useFonts,
-  NunitoSans_400Regular,
-  NunitoSans_700Bold,
-} from '@expo-google-fonts/nunito-sans';
-
-import theme from '@/src/theme';
+  Inter_100Thin,
+  Inter_200ExtraLight,
+  Inter_300Light,
+  Inter_400Regular,
+  Inter_500Medium,
+  Inter_600SemiBold,
+  Inter_700Bold,
+} from '@expo-google-fonts/inter';
+import {useEffect} from 'react';
 
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const [fontsLoaded] = useFonts({
-    NunitoSans_400Regular,
-    NunitoSans_700Bold,
+    Inter_100Thin,
+    Inter_200ExtraLight,
+    Inter_300Light,
+    Inter_400Regular,
+    Inter_500Medium,
+    Inter_600SemiBold,
+    Inter_700Bold,
+    Agbalumo: require('@/src/assets/fonts/Agbalumo-Regular.ttf'),
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (fontsLoaded) {
       SplashScreen.hideAsync();
     }
@@ -29,14 +37,14 @@ export default function RootLayout() {
   }
 
   return (
-    <ThemeProvider theme={theme}>
+    <>
       <StatusBar style="light" />
-      <Stack 
-        screenOptions={{ 
+      <Stack
+        screenOptions={{
           headerShown: false,
           animation: 'slide_from_right',
         }}
       />
-    </ThemeProvider>
+    </>
   );
 }
