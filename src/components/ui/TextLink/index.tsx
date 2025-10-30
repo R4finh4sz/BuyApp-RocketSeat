@@ -1,3 +1,4 @@
+import theme from '@/src/Global/theme';
 import React from 'react';
 import {TouchableOpacity, Text, StyleSheet} from 'react-native';
 
@@ -16,9 +17,9 @@ export default function TextLink({text, onPress}: TextLinkProps) {
 
 const styles = StyleSheet.create({
   text: {
-    color: '#B8A6D9',
+    color: theme.COLORS.BLUE_DARK,
+    fontFamily: theme.FONT_FAMILY.LIGHT,
     fontSize: 20,
-    fontWeight: '400',
     textDecorationLine: 'underline',
   },
 });

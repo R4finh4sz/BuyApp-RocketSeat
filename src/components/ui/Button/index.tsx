@@ -1,3 +1,4 @@
+import theme from '@/src/Global/theme';
 import {Text, StyleSheet, TouchableOpacity} from 'react-native';
 
 interface ButtonProps {
@@ -18,19 +19,19 @@ export default function Button({title, onPress}: ButtonProps) {
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: 'transparent',
+    backgroundColor: '#D9D9D9',
     borderWidth: 2,
-    borderColor: '#B8A6D9',
-    borderRadius: 25,
+    borderColor: '#86A0BF',
+    borderRadius: 50,
     paddingVertical: 20,
     paddingHorizontal: 40,
     alignItems: 'center',
     justifyContent: 'center',
   },
   text: {
-    color: '#B8A6D9',
+    color: theme.COLORS.BLUE_DARK,
     fontSize: 25,
-    fontWeight: '500',
+    fontFamily: theme.FONT_FAMILY.REGULAR,
     letterSpacing: 1,
   },
 });
