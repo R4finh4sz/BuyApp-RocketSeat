@@ -1,12 +1,13 @@
-import React from 'react';
 import {View, StyleSheet} from 'react-native';
-import Button from '@/src/components/Button';
-import TextLink from '@/src/components/TextLink';
+import Button from '@/src/components/ui/Button';
+import TextLink from '@/src/components/ui/TextLink';
 import {Image} from 'expo-image';
+import theme from '@/src/Global/theme';
+import {router} from 'expo-router';
 
 const Intro = () => {
   const handleLogin = () => {
-    console.log('Entrar pressed');
+    router.push('/Home');
   };
 
   const handleTerms = () => {
@@ -38,7 +39,7 @@ const Intro = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F2E5C0',
+    backgroundColor: theme.COLORS.BACKGROUND,
     justifyContent: 'space-between',
     paddingVertical: 60,
   },
@@ -53,8 +54,8 @@ const styles = StyleSheet.create({
     aspectRatio: 1,
   },
   buttonContainer: {
-    paddingHorizontal: 40,
-    marginBottom: 40,
+    paddingHorizontal: 60,
+    marginBottom: 20,
   },
   footerContainer: {
     alignItems: 'center',
