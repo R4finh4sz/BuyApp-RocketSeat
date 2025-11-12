@@ -1,6 +1,6 @@
 export default {
   COLORS: {
-    BACKGROUND: '#F2E5C0',
+    BACKGROUND: '#D0D2D8',
     RED_DARK: '#BF3B44',
     RED_MID: '#F3BABD',
     RED_LIGHT: '#F4E6E7',
@@ -24,7 +24,6 @@ export default {
     MEDIUM: 'Inter_500Medium',
     SEMIBOLD: 'Inter_600SemiBold',
     BOLD: 'Inter_700Bold',
-    Agbalumo: 'Agbalumo',
   },
 
   FONT_SIZE: {
