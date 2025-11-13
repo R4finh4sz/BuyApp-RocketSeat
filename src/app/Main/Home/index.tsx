@@ -1,23 +1,46 @@
 import {useState} from 'react';
-import {View, FlatList, Alert} from 'react-native';
+import {
+  View,
+  FlatList,
+  Alert,
+  ActivityIndicator,
+  ScrollView,
+} from 'react-native';
 import {Image} from 'expo-image';
 import {ShoppingListItem} from '@/src/components/Ui/ShoppingListItem';
 import {ShoppingFilter} from '@/src/components/Ui/ShoppingFilter';
 import {ShoppingInput} from '@/src/components/Ui/ShoppingInput';
 import {EmptyList} from '@/src/components/Ui/EmptyList';
 import type {
-  ShoppingItem,
   FilterType,
+  ShoppingItem,
 } from '@/src/Interfaces/InterfaceShopping';
+import {useShoppingStorage} from '@/src/hooks/useShoppingStorage';
 import {styles} from './styles';
 
 export default function ShoppingScreen() {
-  const [items, setItems] = useState<ShoppingItem[]>([]);
+  const {
+    items,
+    isLoading,
+    error,
+    addItem,
+    updateItem,
+    deleteItem,
+    clearAllItems,
+  } = useShoppingStorage();
+
   const [inputText, setInputText] = useState('');
   const [filter, setFilter] = useState<FilterType>('pending');
 
-  const handleAddItem = () => {
-    if (!inputText.trim()) return;
+  const handleAddItem = async () => {
+    if (!inputText.trim()) {
+      Alert.alert(
+        'Campo vazio',
+        'Por favor, digite o nome do item antes de adicionar.',
+        [{text: 'OK'}],
+      );
+      return;
+    }
 
     const newItem: ShoppingItem = {
       id: Date.now().toString(),
@@ -25,16 +48,19 @@ export default function ShoppingScreen() {
       completed: false,
     };
 
-    setItems([...items, newItem]);
-    setInputText('');
+    const success = await addItem(newItem);
+    if (success) {
+      setInputText('');
+    } else {
+      Alert.alert('Erro', 'Não foi possível adicionar o item.');
+    }
   };
 
-  const handleToggleItem = (id: string) => {
-    setItems(
-      items.map(item =>
-        item.id === id ? {...item, completed: !item.completed} : item,
-      ),
-    );
+  const handleToggleItem = async (id: string) => {
+    const item = items.find(i => i.id === id);
+    if (item) {
+      await updateItem(id, {completed: !item.completed});
+    }
   };
 
   const handleDeleteItem = (id: string) => {
@@ -43,7 +69,12 @@ export default function ShoppingScreen() {
       {
         text: 'Excluir',
         style: 'destructive',
-        onPress: () => setItems(items.filter(item => item.id !== id)),
+        onPress: async () => {
+          const success = await deleteItem(id);
+          if (!success) {
+            Alert.alert('Erro', 'Não foi possível excluir o item.');
+          }
+        },
       },
     ]);
   };
@@ -54,7 +85,12 @@ export default function ShoppingScreen() {
       {
         text: 'Limpar',
         style: 'destructive',
-        onPress: () => setItems([]),
+        onPress: async () => {
+          const success = await clearAllItems();
+          if (!success) {
+            Alert.alert('Erro', 'Não foi possível limpar a lista.');
+          }
+        },
       },
     ]);
   };
@@ -62,6 +98,14 @@ export default function ShoppingScreen() {
   const filteredItems = items.filter(item =>
     filter === 'pending' ? !item.completed : item.completed,
   );
+
+  if (isLoading) {
+    return (
+      <View style={[styles.container, {justifyContent: 'center'}]}>
+        <ActivityIndicator size="large" color="#0000ff" />
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
@@ -78,25 +122,30 @@ export default function ShoppingScreen() {
         onChangeText={setInputText}
         onSubmit={handleAddItem}
       />
+
       <View style={{flex: 1, backgroundColor: '#F6F6F6', borderRadius: 32}}>
-        <ShoppingFilter
-          activeFilter={filter}
-          onFilterChange={setFilter}
-          onClear={handleClearList}
-        />
-        <FlatList
-          data={filteredItems}
-          keyExtractor={item => item.id}
-          contentContainerStyle={styles.listContent}
-          renderItem={({item}) => (
-            <ShoppingListItem
-              item={item}
-              onToggle={handleToggleItem}
-              onDelete={handleDeleteItem}
-            />
-          )}
-          ListEmptyComponent={<EmptyList />}
-        />
+        <ScrollView>
+          <FlatList
+            data={filteredItems}
+            keyExtractor={item => item.id}
+            contentContainerStyle={styles.listContent}
+            ListHeaderComponent={
+              <ShoppingFilter
+                activeFilter={filter}
+                onFilterChange={setFilter}
+                onClear={handleClearList}
+              />
+            }
+            renderItem={({item}) => (
+              <ShoppingListItem
+                item={item}
+                onToggle={handleToggleItem}
+                onDelete={handleDeleteItem}
+              />
+            )}
+            ListEmptyComponent={<EmptyList />}
+          />
+        </ScrollView>
       </View>
     </View>
   );
