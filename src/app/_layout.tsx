@@ -2,27 +2,17 @@ import {StatusBar} from 'expo-status-bar';
 import {Stack, SplashScreen} from 'expo-router';
 import {
   useFonts,
-  Inter_100Thin,
-  Inter_200ExtraLight,
-  Inter_300Light,
-  Inter_400Regular,
-  Inter_500Medium,
-  Inter_600SemiBold,
-  Inter_700Bold,
-} from '@expo-google-fonts/inter';
+  OpenSans_400Regular,
+  OpenSans_600SemiBold,
+} from '@expo-google-fonts/open-sans';
 import {useEffect} from 'react';
 
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const [fontsLoaded] = useFonts({
-    Inter_100Thin,
-    Inter_200ExtraLight,
-    Inter_300Light,
-    Inter_400Regular,
-    Inter_500Medium,
-    Inter_600SemiBold,
-    Inter_700Bold,
+    OpenSans_400Regular,
+    OpenSans_600SemiBold,
   });
 
   useEffect(() => {
@@ -37,7 +27,7 @@ export default function RootLayout() {
 
   return (
     <>
-      <StatusBar style="light" />
+      <StatusBar style="dark" />
       <Stack
         screenOptions={{
           headerShown: false,
