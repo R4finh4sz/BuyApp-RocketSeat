@@ -1,6 +1,7 @@
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import {Image} from 'expo-image';
 import type {ShoppingItem} from '@/src/Interfaces/InterfaceShopping';
+import theme from '@/src/Global/theme';
 
 type ShoppingListItemProps = {
   item: ShoppingItem;
@@ -47,7 +48,7 @@ export function ShoppingListItem({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: theme.COLORS.BACKGROUND_ELEVATED,
     borderRadius: 8,
     flexDirection: 'row',
     alignItems: 'center',
