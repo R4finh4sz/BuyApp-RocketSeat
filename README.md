@@ -21,7 +21,7 @@
 - [Expo](https://expo.dev/)
 - [React Native](https://reactnative.dev/)
 - [TypeScript](https://www.typescriptlang.org/)
-- [Expo router]([https://reactnavigation.org/](https://docs.expo.dev/router/introduction/))
+- [Exporouter](https://docs.expo.dev/router/introduction/)
 - [VS Code](https://code.visualstudio.com/)
 - [Rocketseat](https://rocketseat.com.br/)
 
